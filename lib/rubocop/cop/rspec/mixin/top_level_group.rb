@@ -7,6 +7,11 @@ module RuboCop
       module TopLevelGroup
         extend RuboCop::NodePattern::Macros
 
+        DEPRECATED_PRIVATE_METHOD_WARNING =
+          'top_level_group? is deprecated and will be ' \
+          'removed in the next major version of Rubocop/RSpec.' \
+          'Please copy the method if you need it for your mixin.'
+
         def on_new_investigation
           super
 
@@ -29,6 +34,7 @@ module RuboCop
         def on_top_level_group(_node); end
 
         def top_level_group?(node)
+          warn DEPRECATED_PRIVATE_METHOD_WARNING
           top_level_groups.include?(node)
         end
 
